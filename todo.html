@@ -1,0 +1,61 @@
+<html>
+<head>
+	<title>Todo.list</title>		
+</head>
+<body>
+	<h1>Todos</h1>
+	<div class="New">
+    <input id="name" type="text" value="What needs to be done">
+    </input>
+  </div>
+
+	<div id="tasks">
+	</div>
+	<div id="templates">
+		<script class="action" type="text/template">
+			<div class="action">
+				<p><input type="checkbox" value="<%= complete%>"><%= name%></p>
+			</div>
+		</script>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+	<script type="text/javascript">
+		var tasksTemplateHtml = $('#templates .action').html();
+    var tasksTemplate = _.template(tasksTemplateHtml);
+
+		var tasks = [];
+
+		var renderTaskslist = function (){
+			for (var i = 0; i < tasks.length; i+= 1) {
+				var t = tasks[i];
+
+				var newTaskHtml = tasksTemplate(t)
+
+				
+				$('#tasks').append(newTaskHtml);
+			}
+		};
+
+		$('#name').keypress(function(e){ 
+			if (e.keyCode == 13) {
+				var name = $('#name').val();
+				var complete = $('#complete')
+
+				var newTaskHtml = {
+					name: name,
+					complete: false
+				};
+
+				tasks.push(newTaskHtml)
+
+				$('#tasks').empty();
+				renderTaskslist();
+			}
+		});
+
+	</script>
+
+</body>
+
+</html>
