@@ -14,7 +14,7 @@
 		}
 		.list {
 			background-color: #FFF;
-			width: 38.944882%;
+			width: 48.944882%;
       min-width:380px; 
 			margin: 0 auto;
       margin-top: -20px;
@@ -36,10 +36,8 @@
       font-style: italic;
       width: 95%;
       background: #fff;
-      color: #999;
-      
+      color: #999;      
     }
-
 	</style>		
 </head>
 <body>
@@ -56,7 +54,7 @@
 	<div id="templates">
 		<script class="action" type="text/template">
 			<div class="action">
-				<p><input type="checkbox" value="<%= complete%>"><%= name%></p>
+				<input type="checkbox" value="<%= complete%>"><%= name%>
 			</div>
 		</script>
 	</div>
@@ -74,7 +72,6 @@
 
 				var newTaskHtml = tasksTemplate(t)
 
-				
 				$('#tasks').append(newTaskHtml);
 			}
 		};
