@@ -1,60 +1,26 @@
 <html>
 <head>
 	<title>Todo.list</title>
-	<style type="text/css">
-		h1, p, body {
-			font-family: sans-serif;
-		}
-		input, textarea, {
-   		-webkit-appearance: none;
- 		}
-
-		body {
-			background-color: #eee;
-		}
-		.list {
-			background-color: #FFF;
-			width: 48.944882%;
-      min-width:380px; 
-			margin: 0 auto;
-      margin-top: -20px;
-			padding: 2%;
-			box-shadow: 0 0 4px 0 #333;
-			-webkit-border-radius: 5px;
-			-moz-border-radius: 5px;
-			border-radius: 5px; 
-		}
-		h1 {
-			text-align: center;
-      font-size: 1.8em;
-		}
-		input, textarea, select {
-      border: 1px solid #555;
-      padding: 0.3em;
-      font-size: 1.2em;
-      line-height: 1em;
-      font-style: italic;
-      width: 95%;
-      background: #fff;
-      color: #999;      
-    }
-	</style>		
+	<link rel="stylesheet" type="text/css" href="todo.css"> 		
 </head>
 <body>
 	<div class="list">
 		<h1>Todos</h1>
 		<div class="New">
-	    <input id="name" type="text" value="What needs to be done">
+	    <input id="name" type="text" value="What needs to be done?">
 	    </input>
 	  </div>
 
 		<div id="tasks">
+			<!-- jquery template engine puts all the stuff here -->
 		</div>
 	</div>	
+	
 	<div id="templates">
 		<script class="action" type="text/template">
 			<div class="action">
-				<input type="checkbox" value="<%= complete%>"><%= name%>
+				<span><%= name%></span> 
+				<input type="checkbox"></input>
 			</div>
 		</script>
 	</div>
@@ -79,7 +45,6 @@
 		$('#name').keypress(function(e){ 
 			if (e.keyCode == 13) {
 				var name = $('#name').val();
-				var complete = $('#complete')
 
 				var newTaskHtml = {
 					name: name,
@@ -90,9 +55,19 @@
 
 				$('#tasks').empty();
 				renderTaskslist();
+				$('#name').val("")
 			}
 		});
 
+		// clears textbox on selection
+		$('#name').focusin(function(e){ 
+			$('#name').val("");
+			$(this).css({"color":"black", "font-style":"normal"});
+		});
+
+		$(document).on('click', ".action > input", function (e) {
+  		$('.action').css( "color", "red");
+		});
 	</script>
 
 </body>
