@@ -42,8 +42,11 @@
 			}
 		};
 
-		$('#name').keypress(function(e){ 
-			if (e.keyCode == 13) {
+		$('#name').keypress(function(e){
+
+			var inp = $("#name").val();
+			
+			if(jQuery.trim(inp).length > 0 && e.keyCode == 13){
 				var name = $('#name').val();
 
 				var newTaskHtml = {
@@ -68,9 +71,9 @@
 		$(document).on('click', ".action > input", function (e) {
   		
   		// just need to figure out how to use the index number to the splice function	
-			$ parent.index
-  			tasks.splice(index, 1)
-  		// 
+			// $ parent.index
+  	// 		tasks.splice(index, 1)
+  	// 	// 
 	
   		$('.action').css( "display", "none");
 
