@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Todo.list</title>
+	<link rel="stylesheet" type="text/css" href="todo.css"> 		
+</head>
+<body>
+	<div class="list">
+		<h1>Todos</h1>
+		<div class="New">
+	    <input id="name" type="text" value="What needs to be done?">
+	    </input>
+	  </div>
+
+		<div id="tasks">
+			<!-- jquery template engine puts all the stuff here -->
+		</div>
+	</div>	
+	
+	<div id="templates">
+		<script class="action" type="text/template">
+			<div class="action">
+				<span><%= name%></span> 
+				<input type="checkbox"></input>
+			</div>
+		</script>
+	</div>
+	
+	$($('#element'))
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+
+</html>
