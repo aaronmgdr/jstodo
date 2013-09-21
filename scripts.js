@@ -1,18 +1,25 @@
 
+
+
 var tasksTemplateHtml = $('#templates .action').html();
 var tasksTemplate = _.template(tasksTemplateHtml);
 
 var tasks = [];
 
-var renderTaskslist = function (){
-	for (var i = 0; i < tasks.length; i+= 1) {
-		var t = tasks[i];
-
+var TodoListView = Backbone.View.extend({
+	initialize: function (){
+	},
+	render: function (){
+		for (var i = 0; i < tasks.length; i+= 1) {
+			var t = tasks[i];
+		}
 		var newTaskHtml = tasksTemplate(t)
 
 		$('#tasks').append(newTaskHtml);
 	}
-};
+});
+
+var actionview = new TodoListView();
 
 $('#name').keypress(function(e){
 
@@ -28,8 +35,8 @@ $('#name').keypress(function(e){
 
 		tasks.push(newTaskHtml)
 
-		$('#tasks').empty();
-		renderTaskslist();
+		// $('#tasks').empty();
+		actionview.render();
 		$('#name').val("")
 	}
 });
@@ -40,13 +47,11 @@ $('#name').focusin(function(e){
 	$(this).css({"color":"black", "font-style":"normal"});
 });
 
-$(document).on('click', ".action > input", function (e) {
-	
-	// just need to figure out how to use the index number to the splice function	
-	// $ parent.index
-// 		tasks.splice(index, 1)
-// 	// 
-
-	$('.action').css( "display", "none");
+$(document).on('change', ".action > input", function (e) {
+// 	// just need to figure out how to use the index number to the splice function	
+// 	// $ parent.index
+// // 		tasks.splice(this.el)
+// // 	// 
+// 	var x = $('.action').parent().index()
 
 });
