@@ -1,25 +1,4 @@
-
-
-
-var tasksTemplateHtml = $('#templates .action').html();
-var tasksTemplate = _.template(tasksTemplateHtml);
-
-var tasks = [];
-
-var TodoListView = Backbone.View.extend({
-	initialize: function (){
-	},
-	render: function (){
-		for (var i = 0; i < tasks.length; i+= 1) {
-			var t = tasks[i];
-		}
-		var newTaskHtml = tasksTemplate(t)
-
-		$('#tasks').append(newTaskHtml);
-	}
-});
-
-var actionview = new TodoListView();
+var myDataRef = new Firebase('https://mksh-ml.firebaseio-demo.com/');
 
 $('#name').keypress(function(e){
 
@@ -28,18 +7,23 @@ $('#name').keypress(function(e){
 	if(jQuery.trim(inp).length > 0 && e.keyCode == 13){
 		var name = $('#name').val();
 
-		var newTaskHtml = {
-			name: name,
-			complete: false
-		};
+		
+		myDataRef.push({name: name});
 
-		tasks.push(newTaskHtml)
 
 		// $('#tasks').empty();
-		actionview.render();
 		$('#name').val("")
 	}
 });
+myDataRef.on('child_added', function(snapshot) {
+  	var message = snapshot.val();
+		displayChatMessage(message.name);
+});
+
+
+var displayChatMessage = function (name) {
+        $('<div/>').text(name).prependTo($('#tasks'));
+      };
 
 // clears textbox on selection
 $('#name').focusin(function(e){ 
@@ -47,11 +31,11 @@ $('#name').focusin(function(e){
 	$(this).css({"color":"black", "font-style":"normal"});
 });
 
-$(document).on('change', ".action > input", function (e) {
-// 	// just need to figure out how to use the index number to the splice function	
-// 	// $ parent.index
-// // 		tasks.splice(this.el)
-// // 	// 
-// 	var x = $('.action').parent().index()
+// $(document).on('change', ".action > input", function (e) {
+// // 	// just need to figure out how to use the index number to the splice function	
+// // 	// $ parent.index
+// // // 		tasks.splice(this.el)
+// // // 	// 
+// // 	var x = $('.action').parent().index()
 
-});
+// });
